@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Click the Cake - Birthday Surprise</title>
+  <link href="https://fonts.googleapis.com/css2?family=Pacifico&family=Poppins&display=swap" rel="stylesheet">
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Poppins', sans-serif;
+      background: linear-gradient(to right, #9D50BB, #6E48AA);
+      overflow-x: hidden;
+    }
+    h1 {
+      text-align: center;
+      font-family: 'Pacifico', cursive;
+      color: #fff;
+      margin: 30px 0 10px;
+    }
+    .cake-center {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      margin-top: 30px;
+    }
+    #mainCake {
+      width: 250px;
+      height: auto;
+      cursor: pointer;
+      transition: transform 0.3s ease;
+    }
+    #mainCake:hover {
+      transform: scale(1.05);
+    }
+    .cake-container {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      padding: 20px;
+      gap: 20px;
+    }
+    .pastry {
+      width: 120px;
+      height: 120px;
+      background: url('https://i.imgur.com/f9Qx9h8.png') no-repeat center/contain;
+      cursor: pointer;
+      display: none;
+    }
+    .message-card {
+      width: 300px;
+      background: #fff;
+      border-radius: 10px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+      padding: 20px;
+      margin: 10px;
+      position: relative;
+      display: none;
+      animation: pop 0.5s ease-in-out;
+    }
+    .message-card .sender {
+      font-weight: bold;
+      color: #6a1b9a;
+      margin-bottom: 10px;
+    }
+    @keyframes pop {
+      0% { transform: scale(0); opacity: 0; }
+      60% { transform: scale(1.2); opacity: 1; }
+      100% { transform: scale(1); }
+    }
+  </style>
+</head>
+<body>
+  <h1>Click the Cake to Reveal Birthday Messages 🎂</h1>
+  <div class="cake-center">
+    <img src="cake.png" id="mainCake" alt="Birthday Cake">
+  </div>
+  <div class="cake-container" id="cakeContainer"></div>
+
+  <script>
+    const messages = [
+      {
+        sender: "Fumenim",
+        text: `Happy Birthday, Amrutha! 💖<br>
+        From the moment you stepped into my life, everything became brighter, softer, and filled with love.<br>
+        Your smile is my favorite sunrise, and your laughter is the music my heart loves the most.<br>
+        Today is all about you — the beautiful soul who brings magic into every moment.<br>
+        I’m so lucky to call you mine.<br>
+        Let’s make this birthday unforgettable, just like the way you’ve made my world unforgettable.<br>
+        I love you forever. 💝`
+      },
+      {
+        sender: "Vaishnavi",
+        text: `Heyyy oldy!!<br>
+        Happy happy birthday to you!<br>
+        I miss the time we didn’t need to discuss or plan before meeting, we just knew we’d see each other.<br>
+        I have never said in so many words but you don’t know how much I cherish you and our memories!❤️<br>
+        Let’s catch up soon!!<br>
+        Tell me a day before showing up this time.`
+      },
+      {
+        sender: "Nandini",
+        text: `Happiest Birthday Amrutha!! 🥳<br>
+        Wishing you years filled with magical moments and endless joy!<br>
+        I hope all your dreams come true and that this year brings you immense happiness.`
+      },
+      {
+        sender: "Nikitha",
+        text: `Happy Birthday Amruthaa 🥳❤️<br>
+        To the girl who’s made of giggles and glitter, I hope today is as wonderful as your smile.<br>
+        Never stop being your amazing self. Love you always.`
+      },
+      {
+        sender: "Mikhael",
+        text: `At 20, you’re officially too old to count your age on your fingers. In dog’s year, you are dead. But you are still here. How amazing is that?<br>
+        Anyways although I knew you only kinda like the end of our school years, it was and is still worthwhile to be with you.<br>
+        Now this sounds too formal but seriously love you lots and Happy birthday AMMU!!!<br>
+        WELCOME TO THE 20s…where absolutely nothing changes.🥰😍😜`
+      }
+    ];
+
+    const container = document.getElementById("cakeContainer");
+    const cake = document.getElementById("mainCake");
+
+    cake.addEventListener("click", () => {
+      document.querySelector('.cake-center').style.display = 'none';
+
+      messages.forEach((msg) => {
+        const pastry = document.createElement("div");
+        pastry.className = "pastry";
+        pastry.addEventListener("click", () => {
+          const card = document.createElement("div");
+          card.className = "message-card";
+
+          const sender = document.createElement("div");
+          sender.className = "sender";
+          sender.textContent = msg.sender;
+
+          const text = document.createElement("div");
+          text.innerHTML = msg.text;
+
+          card.appendChild(sender);
+          card.appendChild(text);
+
+          container.appendChild(card);
+          card.style.display = "block";
+        });
+        container.appendChild(pastry);
+        pastry.style.display = 'block';
+      });
+    });
+  </script>
+</body>
+</html>
